@@ -1,0 +1,1 @@
+Aplicativo para me ajudar a perceber quando a internet aqui de casa começa a perder estabilidade.
