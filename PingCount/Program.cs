@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Net.NetworkInformation;
 using System.Threading;
 
@@ -9,6 +6,16 @@ namespace PingCount
 {
     class Program
     {
+        private enum Estado
+        {
+            Funcionando,
+            Caido,
+        }
+
+        private static long Success { get; set; }
+        private static long Fail { get; set; }
+        private static Estado Situacao { get; set; }
+
         static void Main(string[] args)
         {
             //Console.WriteLine("WRAAAAAAAAAAAAAA!!");
@@ -19,22 +26,17 @@ namespace PingCount
 
         private static void Teste()
         {
-            long success = 0, fail = 0;
-
             using (var waiter = new AutoResetEvent(false))
             using (var ping = new Ping())
             {
                 ping.PingCompleted += (s, args) =>
                 {
                     if (args.Reply.Status == IPStatus.Success)
-                        success++;
+                        Yay();
                     else
-                    {
-                        fail++;
-                        Console.Beep();
-                    }
+                        Ahhh();
 
-                    ShowStatus(success, fail);
+                    ShowStatus();
 
                     ((AutoResetEvent)args.UserState).Set();
                 };
@@ -48,25 +50,39 @@ namespace PingCount
                     }
                     catch (PingException)
                     {
-                        fail++;
-                        Console.Beep();
-                        ShowStatus(success, fail);
+                        Ahhh();
+                        ShowStatus();
                     }
 
-                    Thread.Sleep(500);
+                    Thread.Sleep(750);
                 } while (true);
             }
         }
 
-        private static void ShowStatus(long success, long fail)
+        private static void Yay()
         {
-            decimal all = fail + success;
+            Success++;
+            if (Situacao == Estado.Caido)
+            {
+                Console.Beep(1318, 180); //E (Mi)
+                Console.Beep(1760, 180); //A (Lá)
+            }
+            Situacao = Estado.Funcionando;
+        }
+
+        private static void Ahhh()
+        {
+            Situacao = Estado.Caido;
+            Fail++;
+            Console.Beep(880, 200); //A (Lá)
+        }
+
+        private static void ShowStatus()
+        {
+            decimal all = Fail + Success;
 
             Console.Clear();
-            Console.WriteLine("Ping status: {0} ({1:N0}%) succeeded, {2} ({3:N0}%) failed somehow.", success, (success / all) * 100, fail, (fail / all) * 100);
+            Console.WriteLine("Ping status: {0} ({1:N0}%) succeeded, {2} ({3:N0}%) failed somehow.", Success, (Success / all) * 100, Fail, (Fail / all) * 100);
         }
     }
 }
-
-//Console.WriteLine("{0}: {1}", DateTime.Now, args.Reply.Status);
-//Console.WriteLine("Resposta de {0}: tempo={1}ms TTL={2}", args.Reply.Address, args.Reply.RoundtripTime, args.Reply.Options.Ttl);
