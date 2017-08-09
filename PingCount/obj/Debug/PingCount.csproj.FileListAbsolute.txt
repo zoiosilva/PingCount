@@ -1,0 +1,6 @@
+D:\Dados\VS2017\Projects\PingCount\PingCount\bin\Debug\PingCount.exe
+D:\Dados\VS2017\Projects\PingCount\PingCount\bin\Debug\PingCount.pdb
+D:\Dados\VS2017\Projects\PingCount\PingCount\obj\Debug\PingCount.csprojResolveAssemblyReference.cache
+D:\Dados\VS2017\Projects\PingCount\PingCount\obj\Debug\PingCount.csproj.CoreCompileInputs.cache
+D:\Dados\VS2017\Projects\PingCount\PingCount\obj\Debug\PingCount.exe
+D:\Dados\VS2017\Projects\PingCount\PingCount\obj\Debug\PingCount.pdb
