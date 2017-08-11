@@ -8,6 +8,9 @@ namespace PingCount
         {
             Console.SetWindowSize(65, 05);
 
+            //TODO: Implementar Reset dos contadores.
+            //Talvez um pause também.
+
             using (var pc = new PingControl())
             {
                 pc.StartAsync();

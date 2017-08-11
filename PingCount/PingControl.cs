@@ -81,7 +81,7 @@ namespace PingCount
 
         public void Stop()
         {
-            Cancelling = true;
+            Cancelling = true; //Feedback on stopping?
             while (!Cancelled) ;
         }
 
@@ -90,8 +90,8 @@ namespace PingCount
             Success++;
             if (Situacao == Estado.Caido)
             {
-                Console.Beep(1318, 180); //E (Mi)
-                Console.Beep(1760, 180); //A (Lá)
+                Console.Beep(1318, 160); //E (Mi)
+                Console.Beep(1760, 160); //A (Lá)
             }
             Situacao = Estado.Funcionando;
         }
@@ -100,7 +100,7 @@ namespace PingCount
         {
             Situacao = Estado.Caido;
             Fail++;
-            Console.Beep(880, 200); //A (Lá)
+            Console.Beep(440, 200); //A (Lá)
         }
 
         private static void ShowStatus()
