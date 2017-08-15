@@ -55,7 +55,7 @@ namespace PingCount
                     {
                         try
                         {
-                            ping.SendAsync(endereco, waiter);
+                            ping.SendAsync(endereco, waiter); //TODO: Talvez seja melhor mandar só 1 byte de informação...
                             waiter.WaitOne();
                         }
                         catch (PingException)
